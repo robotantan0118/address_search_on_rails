@@ -1,0 +1,29 @@
+<%= form_tag(search_address_url, method: :post) do %>
+  <%= text_field_tag :word %>
+  <%= submit_tag '検索' %>
+<% end %>
+<br/>
+総件数： <%= @addresses.count %> 件
+<br/>
+<table border='1'>
+<tbody>
+  <tr>
+    <th>csvのデータ</th>
+    <th>郵便番号</th>
+    <th>都道府県</th>
+    <th>市区町村</th>
+    <th>その他</th>
+  </tr>
+<% if @addresses.present? %>
+  <% @addresses.each do |address| %>
+    <tr>
+      <td><%= address %></td>
+      <td><%= address.split(',')[0].gsub("'",'') %></td>
+      <td><%= address.split(',')[1].gsub("'",'') %></td>
+      <td><%= address.split(',')[2].gsub("'",'') %></td>
+      <td><%= address.split(',')[3].gsub("'",'') %></td>
+    </tr>
+  <% end %>
+<% end %>
+</tbody>
+</table>
